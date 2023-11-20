@@ -56,7 +56,7 @@ FirebaseDatabase.getInstance().getReference("servo_control");
 
 databaseReference.setValue("90");
 ```
-2. 라즈베리타이에서 데이터 받고 아두이노로 보내기
+2. 라즈베리파이에서 데이터 받고 아두이노로 보내기
 ```
 ser = serial.Serial('/dev/ttyUSB0', 9600) 
 
