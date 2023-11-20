@@ -1,8 +1,25 @@
 # Raspberry
 Smart Bowl - Raspberry part
 
+### 필요 라이브러리
+
+#### 1. PiCamera 
+```
+pip install picamera
+```
+#### 2. Firebase Admin SDK:
+•	설명: 라즈베리 파이에서 Firebase를 사용하기 위한 SDK.
+```
+pip install firebase-admin
+```
+#### 3. Servo 라이브러리:
+•	설명: 서보 모터를 제어하기 위한 라이브러리.
+```
+#include <Servo.h>
+```
+
 ### 데이터 통신 방식
-라즈베리파이-안드로이드 블루투스 통신
+
 #### 1. 블루투스 모듈 연결
 ----------------------------------------------
 * 라즈베리파이 설정
@@ -30,8 +47,35 @@ pairable on
 2. 블루투스 연결 관리 (별도의 클래스 활용)
 
 
+#### 2. firebase 연결
+----------------------------------------------
+
+1. 앱에서 firebase db에 데이터 넣기
+```
+FirebaseDatabase.getInstance().getReference("servo_control");
+
+databaseReference.setValue("90");
+```
+2. 라즈베리타이에서 데이터 받고 아두이노로 보내기
+```
+ser = serial.Serial('/dev/ttyUSB0', 9600) 
+
+   while True:
+       # Firebase에서 데이터 읽기
+       servo_angle = ref.get()
+
+       # 아두이노로 데이터 전송
+       ser.write(servo_angle.encode())
+```
+3. 아두이노 값 변경
+```
+     if (Serial.available() > 0) {
+       int angle = Serial.parseInt();  // 시리얼에서 각도 값을 읽음
+       myservo.write(angle);           
+```
+
 ### 데이터베이스
-InfluxDB 1.0
+#### 1. InfluxDB 1.0
 ```
 pip install influxdb
 ```
@@ -65,6 +109,34 @@ print(result.raw)
 client.close()
 ```
 
+#### 2. firebaseDB
+```
+import firebase_admin
+from firebase_admin import credentials, db
+
+# Firebase 초기화
+cred = credentials.Certificate("path/to/your/firebase-service-account-key.json")
+firebase_admin.initialize_app(cred, {'databaseURL': "https://your-firebase-project-id.firebaseio.com/"})
+
+# Firebase 데이터베이스 참조
+ref = db.reference('/temperature_data')
+
+# Firebase에 데이터 쓰기
+def write_to_firebase(timestamp, temperature):
+    ref.push().set({
+        'timestamp': timestamp,
+        'temperature': temperature
+    })
+    print("Data written to Firebase.")
+
+if __name__ == "__main__":
+    # 예시 데이터
+    sample_timestamp = 1679531748
+    sample_temperature = 25.5
+
+    # Firebase에 데이터 쓰기
+    write_to_firebase(sample_timestamp, sample_temperature)
+```
 
 
 ### 환경 설정 정보
