@@ -10,14 +10,18 @@ pip install picamera
 #### 2. Firebase Admin SDK:
 •	설명: 라즈베리 파이에서 Firebase를 사용하기 위한 SDK.
 ```
-pip install firebase-admin
+sudo pip3 install firebase-admin
+```
+#### 2-1. uuid Module:
+•	설명: UID를 생성하기 위한 모듈 설치
+```
+sudo pip3 install uuid
 ```
 #### 3. Servo 라이브러리:
 •	설명: 서보 모터를 제어하기 위한 라이브러리.
 ```
 #include <Servo.h>
 ```
-
 ### firebase 연결
 ----------------------------------------------
 
@@ -34,7 +38,7 @@ ser = serial.Serial('/dev/ttyUSB0', 9600)
    while True:
        # Firebase에서 데이터 읽기
        servo_angle = ref.get()
-       //센서별로 다른 db에 전송
+       //센서별로 다른 헤더에 전송
 
        # 아두이노로 데이터 전송
        ser.write(servo_angle.encode())
@@ -46,26 +50,11 @@ ser = serial.Serial('/dev/ttyUSB0', 9600)
        myservo.write(angle);           
 ```
 
-### 환경 설정 정보
+### 개발 환경
 ----------------------------------------------
-* 운영체제 : Rasbian OS
-* 코드 readme 생성, 정리
+* Rasbian OS (Debian Bullseye)
+* Python 3.9.2
+* Firebase
 
 
-로직1
-*라즈베리에서 데이터 전송
-라즈베리가 센서로부터 데이터 받아서 -> DB에 전송(센서별) -> DB에 전송된 데이터 -> 안드로이드에서 받기
-*안드로이드에서 데이터 요청 
-버튼을 누르면 -> DB에 전송 -> DB에서 라즈베리파이로 전송 -> 라즈베리파이가 아두이노 제어 -> 이 값을 다시...
 
-로직2
-라즈베리파이(while true) => DB, 아두이노
-
-1. 라즈베리파이 환경설정 패키지 깔고 (카메라 디비 파이썬)
-2. 네트워크(학교 ip)
-3. 카메라pi -> motion 사용
-
-firebase 만들기 key
-제어하는 코드 작성하고
-카메라 코드
-==> 금요일에 테스트
