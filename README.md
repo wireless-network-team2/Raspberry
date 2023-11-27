@@ -10,9 +10,10 @@ log file 권한 오류시 var/log/motion/motion.log 777 권한 부여
 웹에서 요청했는데 회색 화면이 뜨면 카메라 모듈이 잘못됐을 확률이 높음
 방화벽 오류시 ufw allow 포트번호
 ``` 
-- [ ] 파이어베이스 연동 테스트
-- [ ] 아두이노 센서 제어 테스트
-- [ ] 아두이노 - 라즈베리파이 - 파이어베이스 연동
+- [x] 파이어베이스 연동 테스트 & 아두이노 센서 제어 테스트
+![image](https://github.com/wireless-network-team2/Raspberry/assets/149992750/b95b89a9-e52d-4790-a320-6de2307b4952)
+
+- [ ] 다중 아두이노 - 라즈베리파이 - 파이어베이스 연동
 - [ ] 웹 스트리밍 - 안드로이드 연동
 
 
@@ -58,15 +59,30 @@ databaseReference.setValue("90");
 ```
 2. 라즈베리파이에서 데이터 받고 아두이노로 보내기
 ```
-ser = serial.Serial('/dev/ttyUSB0', 9600) 
+import serial
+import firebase_admin
+from firebase_admin import credentials, db
 
-   while True:
-       # Firebase에서 데이터 읽기
-       servo_angle = ref.get()
-       //센서별로 다른 헤더에 전송
+cred = credentials.Certificate("path/to/your/firebase/credentials.json")
+firebase_admin.initialize_app(cred, {"databaseURL": "https://your-project-id.firebaseio.com"})
 
-       # 아두이노로 데이터 전송
-       ser.write(servo_angle.encode())
+ref = db.reference("your_data_key")
+
+port = '/dev/ttyACM0'
+brate = 9600
+cmd = 'temp'
+
+seri = serial.Serial(port, baudrate = brate, timeout = None)
+seri.write(cmd.encode())
+
+a = 1
+while a:
+	if seri.in_waiting !=0 :
+		content = seri.readline()
+		print(content[:-2].decode())
+		data = {"sensor_data": 25.5, "timestamp": "2023-11-24T12:34:56Z"}
+		ref.set(data)
+		a=0
 ```
 3. 아두이노 값 변경
 ```
