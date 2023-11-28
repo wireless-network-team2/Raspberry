@@ -13,8 +13,8 @@ ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)
 
 try:
     while True:
-        door_value = db.reference('door').get()
-        feeding_value = db.reference('feeding').get()
+        door_value = db.reference('btn_door').get()
+        feeding_value = db.reference('btn_feeding').get()
 
         ser.write(str(door_value).encode('utf-8'))
         ser.write(str(feeding_value).encode('utf-8'))
