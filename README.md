@@ -12,10 +12,8 @@ log file 권한 오류시 var/log/motion/motion.log 777 권한 부여
 ``` 
 - [x] 파이어베이스 연동 테스트 & 아두이노 센서 제어 테스트
 ![image](https://github.com/wireless-network-team2/Raspberry/assets/149992750/b95b89a9-e52d-4790-a320-6de2307b4952)
-
 - [x] 파이어베이스 리얼타임데이터베이스 구축
-![image](https://github.com/wireless-network-team2/Raspberry/assets/110397586/8e2dd276-7e9d-4d6b-b47d-ad4b33c706fb)
-
+![image](https://github.com/wireless-network-team2/Raspberry/assets/110397586/6cbf6f68-5608-4c01-b296-8a2ba25d14e3)
 - [ ] 다중 아두이노 - 라즈베리파이 - 파이어베이스 연동
 - [ ] 웹 스트리밍 - 안드로이드 연동
 
