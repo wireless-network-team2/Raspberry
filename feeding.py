@@ -15,13 +15,13 @@ while True:
         if data:
             for key, value in data.items():
                 if value == 1:
-                    if key == "Little":
+                    if key == "L":
                         ser.write("L".encode('utf-8'))
                         print("Little")
-                    elif key == "Half":
+                    elif key == "H":
                         ser.write("H".encode('utf-8'))
                         print("Half")
-                    elif key == "Full":
+                    elif key == "F":
                         ser.write("F".encode('utf-8'))
                         print("Full")
 
