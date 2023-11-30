@@ -15,8 +15,15 @@ while True:
         if data:
             for key, value in data.items():
                 if value == 1:
-                    ser.write(f"{key}\n".encode('utf-8'))
-                    print(f"Sent to Arduino: {key}")
+                    if key == "Little":
+                        ser.write("L".encode('utf-8'))
+                        print("Little")
+                    elif key == "Half":
+                        ser.write("H".encode('utf-8'))
+                        print("Half")
+                    elif key == "Full":
+                        ser.write("F".encode('utf-8'))
+                        print("Full")
 
     except Exception as e:
         print(f"Error: {e}")
