@@ -30,5 +30,3 @@ while True:
 
     except Exception as e:
         print(f"Error: {e}")
-
-    time.sleep(10)  # 10초마다 데이터를 가져옴
