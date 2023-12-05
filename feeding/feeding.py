@@ -4,7 +4,7 @@ import requests
 import time
 import serial
 
-# Define credentials after initializing Firebase
+# Firebase 초기화 전에 자격 증명 정의
 cred = credentials.Certificate("p/home/user/team2/smartbowl-b05d9-firebase-adminsdk-ldgsu-b9626cd4c3.json")
 firebase_admin.initialize_app(cred, {'databaseURL': 'https://smartbowl-b05d9.firebaseio.com/'})
 ref = db.reference('/feeding')
