@@ -5,8 +5,8 @@ import time
 import serial
 
 # Firebase 초기화 전에 자격 증명 정의
-cred = credentials.Certificate("p/home/user/team2/smartbowl-b05d9-firebase-adminsdk-ldgsu-b9626cd4c3.json")
-firebase_admin.initialize_app(cred, {'databaseURL': 'https://smartbowl-b05d9.firebaseio.com/'})
+cred = credentials.Certificate("/home/user/team2/smartbowl-b05d9-firebase-adminsdk-ldgsu-b9626cd4c3.json")
+firebase_admin.initialize_app(cred, {'databaseURL': 'https://smartbowl-b05d9-default-rtdb.firebaseio.com/'})
 ref = db.reference('/feeding')
 
 arduino_serial_port = '/dev/ttyACM0'
@@ -31,9 +31,7 @@ while True:
 						print("Full")
 
 					data[key] = 0
-					requests.patch('https://smartbowl-b05d9.firebaseio.com/feeding.json', json={key: 0})
+					requests.patch('https://smartbowl-b05d9.firebaseio.com', json={key: 0})
 
 	except Exception as e:
 		print(f"Error: {e}")
-
-	time.sleep(1)
