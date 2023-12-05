@@ -15,11 +15,10 @@ arduino_serial_port = '/dev/ttyACM0'
 ser = serial.Serial(arduino_serial_port, 9600)
 
 while True:
-    try:
-        # Firebase에서 데이터 읽기
-        data = ref.get()
-
-         if data:
+    # Firebase에서 데이터 읽기
+    data = ref.get()
+    
+    if data:
         for key, value in data.items():
             if value == 1:
                 if key == "little":
